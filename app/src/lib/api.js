@@ -5,7 +5,7 @@ class Api {
             'Content-Type': 'application/json',
             'DataType': 'json',
             'X-Requested-With': 'XMLHttpRequest',
-            'X-Mashape-key': 'qJUsbP6zFGmsh60qUu4Swdr6H4Lvp1xJ8Ldjsns0F0kN40P57g',
+            'X-Mashape-key': 'ZZUpn1n6armsh5eCQ6hJ8wvw8lSbp18LgQ7jsnX5lKssTjKzWE',
         }
     }
 
@@ -26,8 +26,9 @@ class Api {
     }
 
     static xhr(route, params, verb) {
-        const host = 'https//spoonacular-recipe-food-nutrition-v1.p.mashape.com'
+        const host = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com'
         const url = `${host}${route}`;
+        console.log(url);
         let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null);
         options.headers = Api.headers();
         return fetch(url, options).then((resp) => {
@@ -35,7 +36,7 @@ class Api {
             if (resp.ok) {
                 return json;
             }
-            return json.then(error => { throw err });
+            return json.then(error => { throw error });
         })
     }
 }
