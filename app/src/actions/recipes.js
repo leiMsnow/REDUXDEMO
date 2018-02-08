@@ -27,8 +27,8 @@ export function setSearchedRecipes({ recipes }) {
     }
 }
 
-export function addRecipe() {
-    return {
-        type: types.ADD_RECIPE,
-    }
-}
+// export function addRecipe() {
+//     return {
+//         type: types.ADD_RECIPE,
+//     }
+// }

@@ -16,21 +16,23 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ingredientsInput: '',
+            ingredientsInput: this.props.modules.moduleType + '',
             searching: false,
         }
     }
     searchPressed() {
-        if (!this.state.searching) {
-            this.setState({ searching: true });
-            this.props.fetchRecipes(this.state.ingredientsInput)
-                .then(() => {
-                    this.setState({ searching: false });
-                })
-                .catch(() => {
-                    this.setState({ searching: false });
-                })
-        }
+        this.props.setServiceModules(this.props.modules.moduleType === 1 ? 2 : 1);
+        // if (!this.state.searching) {
+        //     this.setState({ searching: true });
+        //     this.props.fetchRecipes(this.state.ingredientsInput)
+        //         .then(() => {
+        //             this.setState({ searching: false });
+        //         })
+        //         .catch(() => {
+        //             this.setState({ searching: false });
+        //         })
+        // }
+
     }
 
     recipes() {
@@ -40,6 +42,7 @@ class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text>{this.props.modules.moduleType}</Text>
                 <View style={styles.searchContainer}>
                     <TextInput
                         style={styles.searchInput}
@@ -125,6 +128,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
+        modules: state.serviceModules,
         searchedRecipes: state.searchedRecipes
     }
 }

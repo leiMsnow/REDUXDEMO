@@ -1,2 +1,5 @@
 export const SET_SEARCHED_RECIPES = 'SET_SEARCHED_RECIPES';
 export const ADD_RECIPE = 'ADD_RECIPE';
+
+export const MODULES_TYPE = 'MODULES_TYPE';
+export const SET_MODULES_TYPE = 'SET_MODULES_TYPE';

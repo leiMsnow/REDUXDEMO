@@ -5,7 +5,6 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 import reducer from './app/src/reducers';
-import Peckish from './app/src/peckish';
 import AppContainer from './app/src/containers/AppContainer';
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
