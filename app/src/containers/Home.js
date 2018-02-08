@@ -16,11 +16,21 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ingredientsInput: ''
+            ingredientsInput: '',
+            searching: false,
         }
     }
     searchPressed() {
-        this.props.fetchRecipes(this.state.ingredientsInput);
+        if (!this.state.searching) {
+            this.setState({ searching: true });
+            this.props.fetchRecipes(this.state.ingredientsInput)
+                .then(() => {
+                    this.setState({ searching: false });
+                })
+                .catch(() => {
+                    this.setState({ searching: false });
+                })
+        }
     }
 
     recipes() {
@@ -29,7 +39,7 @@ class Home extends Component {
 
     render() {
         return (
-            <View style={styles.scene}>
+            <View style={styles.container}>
                 <View style={styles.searchContainer}>
                     <TextInput
                         style={styles.searchInput}
@@ -44,7 +54,7 @@ class Home extends Component {
                 </View>
                 <ScrollView style={styles.scrollContainer}>
                     {
-                        this.recipes().map(recipe => {
+                        this.state.searching ? (<Text>Searching...</Text>) : this.recipes().map(recipe => {
                             return <View key={recipe.id} style={styles.resultContainer}>
                                 <Image source={{ uri: recipe.image }} style={styles.resultImage} />
                                 <Text style={styles.reultText}>{recipe.title}</Text>
@@ -58,7 +68,7 @@ class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-    scene: {
+    container: {
         flex: 1,
         paddingTop: 40,
         paddingBottom: 20,

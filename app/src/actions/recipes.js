@@ -9,9 +9,11 @@ export function fetchRecipes(ingredients) {
             'limitLicense=false',
             'number=20',
             'ranking=1',
-        ].join('&');
-        return Api.get(`/recipes/findByIngredients?&${params}`).then(resp => {
-            dispatch(setSearchedRecipes({ recipes: resp }))
+        ];
+        return Api.get({
+            route: `/recipes/findByIngredients?${params.join('&')}`,
+        }).then(recipes => {
+            dispatch(setSearchedRecipes({ recipes }))
         }).catch((ex) => {
             console.log(ex);
         })
